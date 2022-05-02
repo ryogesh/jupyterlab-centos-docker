@@ -60,6 +60,14 @@ http://<host>:8878
 
 ```
 
+## JupyterLab Login
+Default password is set to pwd123
+
+To change the password edit JPPWD in the Dockerfile
+
+Refer: https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#preparing-a-hashed-password
+
+
 ## Running pyspark2 against CDP from terminal
 __Notice:__ Activate py2 env before running python2 or pyspark(2)
 
