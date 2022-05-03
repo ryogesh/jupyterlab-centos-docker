@@ -67,9 +67,60 @@ To change the password edit JPPWD in the Dockerfile
 
 Refer: https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#preparing-a-hashed-password
 
+## Running pyspark(3) from terminal with no CDP install
+
+```
+[jovyan@cbase ~]$ python
+Python 3.9.7 (default, Sep 16 2021, 13:09:58) 
+[GCC 7.5.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from sklearnex.svm import SVC
+>>> from pyspark.sql import SparkSession, types, functions as f
+>>> 
+>>> 
+>>> spark = SparkSession.builder\
+...             .enableHiveSupport()\
+...             .appName("Test")\
+...             .getOrCreate()
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+22/05/03 01:30:02 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+>>> dir()
+['SVC', 'SparkSession', '__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__', 'f', 'spark', 'types']
+>>> 
+
+```
+Or launch pyspark(3) directly from terminal
+
+```
+[jovyan@cbase ~]$ pyspark
+Python 3.9.7 (default, Sep 16 2021, 13:09:58) 
+[GCC 7.5.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+22/05/03 01:24:37 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 3.2.1
+      /_/
+
+Using Python version 3.9.7 (default, Sep 16 2021 13:09:58)
+Spark context Web UI available at http://cbase.my.site:4040
+Spark context available as 'sc' (master = local, app id = local-1651541078688).
+SparkSession available as 'spark'.
+>>> spark.sparkContext.getConf().getAll()
+[('spark.master', 'local'), ('spark.executor.id', 'driver'), ('spark.driver.host', 'cbase.<redacted>'), ('spark.app.name', 'PySparkShell'), ('spark.app.id', 'local-1651541078688'), ('spark.driver.port', '37745'), ('spark.sql.warehouse.dir', 'file:/home/jovyan/spark-warehouse'), ('spark.sql.catalogImplementation', 'hive'), ('spark.app.startTime', '1651541077215'), ('spark.rdd.compress', 'True'), ('spark.serializer.objectStreamReset', '100'), ('spark.submit.pyFiles', ''), ('spark.submit.deployMode', 'client'), ('spark.sql.session.timeZone', 'UTC'), ('spark.ui.showConsoleProgress', 'true')]
+>>> 
+
+```
 
 ## Running pyspark2 against CDP from terminal
-__Notice:__ Activate py2 env before running python2 or pyspark(2)
+__Note:__ Activate py2 env before running python2 or pyspark(2)
 
 ```
 (base) [jovyan@m4 ~]$ conda activate py2
