@@ -33,7 +33,7 @@ CDH installation found.
 create conda python2.7 env
 Remove java, pyspark install and spark env config
 Sending build context to Docker daemon  29.18kB
-Step 1/24 : FROM centos:7.9.2009
+Step 1/21 : FROM centos:7.9.2009
  ---> eeb6ee3f44bd
 
 ```
@@ -192,6 +192,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 ```
 Or launch pyspark3 directly from terminal
 
+__Note:__ Use pyspark3, not pyspark
 ```
 (base) [jovyan@m4 ~]$ pyspark3
 Python 3.9.7 (default, Sep 16 2021, 13:09:58) 
